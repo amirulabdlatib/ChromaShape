@@ -1,0 +1,104 @@
+{% extends "ChromaShape/base.html" %} {% block content %} {% if user.is_authenticated %}
+<!-- admin form -->
+<section id="adminFrom">
+  <div class="container mt-5">
+    <form id="shapeForm">
+      {% csrf_token %}
+
+      <div class="row">
+        <div class="col-md-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required />
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Choose a shape:</label>
+          <select class="form-select" name="shape">
+            <option value="circle">Circle</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Choose a color:</label>
+          <select class="form-select" name="color">
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+          </select>
+        </div>
+
+        <div class="col-md-3" style="padding-top: 2em">
+          <a href="" class="btn btn-primary" style="width: 100%" id="addShape">Add</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- End of admin form -->
+{% endif %}
+<!-- Table -->
+<section id="table">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>TimeStamp</th>
+              <th>Name</th>
+              <th>ShapeColor</th>
+              {% if user.is_authenticated %}
+              <th>Action</th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table rows will be dynamically added here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End of Table -->
+
+<!-- Modal -->
+<form id="updateShapeForm">
+  {% csrf_token %}
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalTitle">Update Shape</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="updateName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="updateName" name="updateName" required />
+
+          <label class="form-label mt-2">Choose a shape:</label>
+          <select class="form-select" id="updateShape" name="updateShape">
+            <option value="circle">Circle</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+          </select>
+
+          <label class="form-label mt-2">Choose a color:</label>
+          <select class="form-select" id="updateColor" name="updateColor">
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="updateSaveChanges">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- End of Modal -->
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "ChromaShape/base.html" %} {% block content %}
+
+<div class="container">
+  <div class="row justify-content-center pt-5">
+    <div class="col-md-8">
+      <form method="POST" action='{% url "doLogin" %}'>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
